@@ -3,11 +3,11 @@
 import { useWalletContext } from "@/context/wallet";
 
 export default function Footer() {
-  const { isLoggedIn, provider } = useWalletContext();
+  const { isLoggedIn } = useWalletContext();
 
   return (
     <footer
-      className={`absolute bottom-0 footer p-2.5 flex items-center justify-center md:justify-between bg-neutral text-neutral-content md:px-20 ${
+      className={`bottom-0 footer p-2.5 flex items-center justify-center md:justify-between bg-neutral text-neutral-content md:px-20 ${
         isLoggedIn ? "mt-0" : "mt-12"
       }`}
     >
