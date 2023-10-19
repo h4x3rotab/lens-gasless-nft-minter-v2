@@ -29,7 +29,7 @@ export default function ProgressAlertComponent({ hash }: any) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Check out your user op's progress here.
+              Check out your user op&apos;s progress here.
             </a>
             <span className="ml-2 loading loading-dots loading-md"></span>
           </div>
