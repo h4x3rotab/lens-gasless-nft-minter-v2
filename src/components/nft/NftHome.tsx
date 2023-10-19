@@ -4,7 +4,7 @@ import {
 } from "@/config/token-contract";
 import { useWalletContext } from "@/context/wallet";
 import { useInterval } from "@/hooks/useInterval";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Transaction, encodeFunctionData } from "viem";
 import { BANNER_STATES } from "../utils/Banner";
 
@@ -20,7 +20,9 @@ export default function NftHome({
   txHash,
   setError,
 }: any) {
-  const { isLoggedIn, provider } = useWalletContext();
+  const { login, isLoggedIn, provider } = useWalletContext();
+  const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
 
   useInterval(async () => {
     if (isMinting && !txHash && userOpHash && provider) {
@@ -43,6 +45,8 @@ export default function NftHome({
 
         setIsMinting(false);
         setHasMinted(true);
+        setTxHash(undefined);
+        setUserOpHash(undefined);
         setBannerState(BANNER_STATES.MINT_SUCCESS);
         handleScroll("wallet");
         console.log(txHash, txReceipt);
@@ -57,6 +61,7 @@ export default function NftHome({
     if (!provider) {
       throw new Error("Provider not initialized");
     }
+    setHasMinted(false);
     setIsMinting(true);
     setBannerState(BANNER_STATES.MINT_STARTED);
 
@@ -96,6 +101,29 @@ export default function NftHome({
     }
   };
 
+  const openModal = useCallback(() => {
+    setIsLoggingIn(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsLoggingIn(false);
+  }, []);
+
+  const onEmailChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      setEmail(e.target.value);
+    },
+    []
+  );
+
+  const handleLogin = useCallback(async () => {
+    await login(email);
+    setIsLoggingIn(false);
+    setEmail("");
+    closeModal();
+  }, [login, email]);
+
   return (
     <div>
       <div className="relative flex flex-col md:flex-row gap-10 md:gap-20 mx-6 md:mx-20 mt-12">
@@ -109,7 +137,7 @@ export default function NftHome({
         <div className="flex flex-col items-center gap-y-5 lg:mt-16">
           <div
             className="relative inline-flex group float-on-hover"
-            onClick={handleMint}
+            onClick={() => (isLoggedIn ? handleMint() : openModal())}
           >
             <div className="absolute z-[-1] transition-all duration-1000 opacity-20 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
             <button className="flex items-center text-3xl px-16 py-4 lg:px-28 lg:py-6 rounded-lg text-white bg-custom-gradient">
@@ -228,6 +256,30 @@ export default function NftHome({
           </div>
         </div>
       </div>
+      <dialog className={`modal ${isLoggingIn && "modal-open"}`}>
+        <div className="modal-box flex flex-col gap-[12px]">
+          <h3 className="font-bold text-lg">Enter your email!</h3>
+          <input
+            placeholder="email"
+            onChange={onEmailChange}
+            className="input border border-solid border-gray-400"
+          />
+          <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px]">
+            <button
+              onClick={closeModal}
+              className="btn bg-gradient-2transition ease-in-out duration-500 transform hover:scale-110"
+            >
+              Close
+            </button>
+            <button
+              onClick={handleLogin}
+              className="btn bg-gradient-1transition ease-in-out duration-500 transform hover:scale-110"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </dialog>
       {/* {displayStartBanner && !userOpHash ? <StartAlertComponent /> : ""} */}
       {/* {displayStartBanner && !hasMinted ? (
         <ProgressAlertComponent hash={userOpHash} />

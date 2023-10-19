@@ -83,7 +83,7 @@ export default function WalletDisplay({
 
   useEffect(() => {
     fetchUserNfts();
-  }, []);
+  }, [hasMinted]);
 
   async function fetchUserNfts() {
     setIsLoading(true);
@@ -165,8 +165,10 @@ export default function WalletDisplay({
   }
 
   return (
-    <div className="mt-14 md:mt-32 mb-6 md:mb-16 mx-6 md:mx-20" id="wallet">
-      <div className="mb-6 font-mono text-3xl font-bold">Your Wallet</div>
+    <div className="mt-14 md:mt-32 mb-6 md:mb-16 mx-6 md:mx-20">
+      <div id="wallet" className="mb-6 font-mono text-3xl font-bold">
+        Your Wallet
+      </div>
       {isLoading ? (
         <div className="flex items-center justify-center mt-[-320px] mb-16 md:mt-[-350px] md:mb-0">
           <Loader loadingMessage="Fetching your NFTs..." />

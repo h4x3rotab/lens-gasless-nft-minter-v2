@@ -7,7 +7,7 @@ export default function Footer() {
 
   return (
     <footer
-      className={`bottom-0 footer p-4 flex items-center justify-center md:justify-between bg-neutral text-neutral-content md:px-20 ${
+      className={`absolute bottom-0 footer p-2.5 flex items-center justify-center md:justify-between bg-neutral text-neutral-content md:px-20 ${
         isLoggedIn ? "mt-0" : "mt-12"
       }`}
     >

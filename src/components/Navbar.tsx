@@ -34,6 +34,7 @@ export default function Navbar() {
     await login(email);
     setIsLoggingIn(false);
     setEmail("");
+    closeModal();
   }, [login, email]);
 
   const handleLogout = useCallback(async () => {
@@ -42,26 +43,28 @@ export default function Navbar() {
     setIsLoggingOut(false);
   }, [logout]);
 
-  // function truncateEthAddress(
-  //   address: string,
-  //   prefixLength: number = 4,
-  //   suffixLength: number = 4
-  // ): string {
-  //   console.log(isLoggedIn);
+  function truncateEthAddress(
+    address: string,
+    prefixLength: number = 4,
+    suffixLength: number = 4
+  ): string {
+    if (!address) {
+      return "";
+    }
 
-  //   if (!address.startsWith("0x")) {
-  //     throw new Error("Invalid Ethereum address");
-  //   }
-  //   if (address.length !== 42) {
-  //     // 2 for '0x' and 40 for the address
-  //     throw new Error("Invalid Ethereum address length");
-  //   }
+    if (!address.startsWith("0x")) {
+      throw new Error("Invalid Ethereum address");
+    }
+    if (address.length !== 42) {
+      // 2 for '0x' and 40 for the address
+      throw new Error("Invalid Ethereum address length");
+    }
 
-  //   const prefix = address.substr(0, 2 + prefixLength); // 2 for '0x'
-  //   const suffix = address.substr(-suffixLength);
+    const prefix = address.substr(0, 2 + prefixLength); // 2 for '0x'
+    const suffix = address.substr(-suffixLength);
 
-  //   return `${prefix}...${suffix}`;
-  // }
+    return `${prefix}...${suffix}`;
+  }
 
   return (
     <div className="navbar font-mono mt-2 flex justify-between items-center">
@@ -80,8 +83,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {/* {truncateEthAddress(scaAddress)} */}
-              {scaAddress}
+              {truncateEthAddress(scaAddress as string)}
             </a>
           </div>
           <div className="dropdown dropdown-end">
@@ -101,14 +103,13 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {/* {truncateEthAddress(scaAddress as string)} */}
-                  {scaAddress}
+                  {truncateEthAddress(scaAddress as string)}
                 </a>
               </li>
 
               <li>
                 <button className="btn btn-error" onClick={handleLogout}>
-                  <div className="mt-[7.5px]">Logout</div>
+                  <div className="mt-[7.5px] text-white">Logout</div>
                 </button>
               </li>
             </ul>
@@ -130,16 +131,16 @@ export default function Navbar() {
           />
           <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px]">
             <button
-              onClick={handleLogin}
-              className="btn bg-gradient-1transition ease-in-out duration-500 transform hover:scale-110"
-            >
-              Login
-            </button>
-            <button
               onClick={closeModal}
               className="btn bg-gradient-2transition ease-in-out duration-500 transform hover:scale-110"
             >
               Close
+            </button>
+            <button
+              onClick={handleLogin}
+              className="btn bg-gradient-1transition ease-in-out duration-500 transform hover:scale-110"
+            >
+              Login
             </button>
           </div>
         </div>
