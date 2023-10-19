@@ -37,7 +37,6 @@ export default function WalletDisplay({
   const [recipientAddress, setRecipientAddress] = useState("");
   const [transferNftTokenId, setTransferNftTokenId] = useState(-1);
   const [isTransferring, setIsTransferring] = useState(false);
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [userOpHash, setUserOpHash] = useState("");
   const [txHash, setTxHash] = useState("");
   const [hasTransferred, setHasTransferred] = useState(false);

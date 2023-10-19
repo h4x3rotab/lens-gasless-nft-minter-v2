@@ -88,7 +88,7 @@ export default function Navbar() {
           </div>
           <div className="dropdown dropdown-end">
             <img
-              src={generator.generateRandomAvatar(email!)}
+              src={generator.generateRandomAvatar(email)}
               tabIndex={0}
               className="w-12 h-12 rounded-full align-middle cursor-pointer mr-2 mb-2"
             />

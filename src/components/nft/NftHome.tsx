@@ -259,27 +259,33 @@ export default function NftHome({
       <dialog className={`modal ${isLoggingIn && "modal-open"}`}>
         <div className="modal-box flex flex-col gap-[12px]">
           <h3 className="font-bold text-lg">Enter your email!</h3>
-          <input
-            placeholder="email"
-            onChange={onEmailChange}
-            className="input border border-solid border-gray-400"
-          />
-          <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px]">
-            <button
-              onClick={closeModal}
-              className="btn bg-gradient-2transition ease-in-out duration-500 transform hover:scale-110"
-            >
-              Close
-            </button>
-            <button
-              onClick={handleLogin}
-              className="btn bg-gradient-1transition ease-in-out duration-500 transform hover:scale-110"
-            >
-              Login
-            </button>
-          </div>
+
+          <form onSubmit={handleLogin}>
+            <input
+              placeholder="email"
+              onChange={onEmailChange}
+              className="input border border-solid border-gray-400"
+            />
+
+            <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px]">
+              <button
+                type="button" // Specify the type so it doesn't trigger form submission
+                onClick={closeModal}
+                className="btn bg-gradient-2transition ease-in-out duration-500 transform hover:scale-110"
+              >
+                Close
+              </button>
+              <button
+                type="submit" // This will submit the form
+                className="btn bg-gradient-1transition ease-in-out duration-500 transform hover:scale-110"
+              >
+                Login
+              </button>
+            </div>
+          </form>
         </div>
       </dialog>
+
       {/* {displayStartBanner && !userOpHash ? <StartAlertComponent /> : ""} */}
       {/* {displayStartBanner && !hasMinted ? (
         <ProgressAlertComponent hash={userOpHash} />
