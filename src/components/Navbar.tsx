@@ -35,7 +35,7 @@ export default function Navbar() {
       event.preventDefault();
       await login(email);
       setIsLoggingIn(false);
-      setEmail("");
+      setEmail(email);
       closeModal();
     },
     [login, email]

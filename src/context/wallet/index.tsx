@@ -125,7 +125,7 @@ export const WalletContextProvider = ({
   }, [magic, connectProviderToAccount, signer, provider]);
 
   if (isLoading) {
-    return <Loader loadingMessage={"Loading..."} />;
+    return <Loader loadingMessage={"Loading"} />;
   }
 
   return (

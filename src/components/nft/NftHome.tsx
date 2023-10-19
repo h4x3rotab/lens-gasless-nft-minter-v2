@@ -18,6 +18,7 @@ export default function NftHome({
   userOpHash,
   txHash,
   setError,
+  setSuccessMessage,
 }: any) {
   const { login, isLoggedIn, provider } = useWalletContext();
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
@@ -46,6 +47,7 @@ export default function NftHome({
         setHasMinted(true);
         setTxHash(undefined);
         setUserOpHash(undefined);
+        setSuccessMessage("You successfully minted an NFT w/o paying gas!");
         setBannerState(BANNER_STATES.MINT_SUCCESS);
         handleScroll("wallet");
         console.log(txHash, txReceipt);
@@ -73,8 +75,11 @@ export default function NftHome({
           args: [await provider.getAddress()],
         }),
       });
+
       setUserOpHash(uoHash.hash);
-      setBannerState(BANNER_STATES.USER_OP_HASH);
+      setTimeout(() => {
+        setBannerState(BANNER_STATES.USER_OP_HASH);
+      }, 5000);
     } catch (e: any) {
       console.log(e);
       setError(e.details || e.message);
@@ -265,7 +270,7 @@ export default function NftHome({
 
           <form onSubmit={handleLogin}>
             <input
-              placeholder="email"
+              placeholder="Email"
               onChange={onEmailChange}
               className="input border border-solid border-gray-400 w-full"
             />
