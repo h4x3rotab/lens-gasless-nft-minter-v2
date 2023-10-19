@@ -8,12 +8,36 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        bannerShadow:
+          "0px 0px 0px 0px rgba(132, 230, 192, 0.10), 0px 44px 97px 0px rgba(132, 230, 192, 0.10), 0px 176px 176px 0px rgba(132, 230, 192, 0.09), 0px 396px 238px 0px rgba(132, 230, 192, 0.05), 0px 704px 282px 0px rgba(132, 230, 192, 0.01), 0px 1100px 308px 0px rgba(132, 230, 192, 0.00);",
+      },
       backgroundImage: {
-        "gradient-1": "linear-gradient(125deg, #ff9c27 0%, #fd48ce 51.7%)",
-        "gradient-2":
-          "linear-gradient(120deg, #5498ff 26.44%, #a131f9 109.11%)",
+        "custom-gradient":
+          "linear-gradient(116deg, #FF9C27 17.35%, #FD48CE 71.38%)",
       },
     },
+  },
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          primary: "#CE26A2",
+
+          secondary: "#F16F46",
+
+          neutral: "#64748B",
+
+          "base-100": "white",
+
+          success: "#16A34A",
+
+          warning: "#EA580C",
+
+          error: "#DC2626",
+        },
+      },
+    ],
   },
   plugins: [require("daisyui")],
 };

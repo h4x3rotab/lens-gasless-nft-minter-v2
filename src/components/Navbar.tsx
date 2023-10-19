@@ -1,11 +1,15 @@
 "use client";
 import { useWalletContext } from "@/context/wallet";
+import Image from "next/image";
+import { AvatarGenerator } from "random-avatar-generator";
 import { useCallback, useState } from "react";
+import demoLogo from "../../public/assets/demo_logo.svg";
 
 export default function Navbar() {
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
   const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
+  const generator = new AvatarGenerator();
 
   const { isLoggedIn, login, logout, username, scaAddress } =
     useWalletContext();
@@ -38,43 +42,83 @@ export default function Navbar() {
     setIsLoggingOut(false);
   }, [logout]);
 
+  // function truncateEthAddress(
+  //   address: string,
+  //   prefixLength: number = 4,
+  //   suffixLength: number = 4
+  // ): string {
+  //   console.log(isLoggedIn);
+
+  //   if (!address.startsWith("0x")) {
+  //     throw new Error("Invalid Ethereum address");
+  //   }
+  //   if (address.length !== 42) {
+  //     // 2 for '0x' and 40 for the address
+  //     throw new Error("Invalid Ethereum address length");
+  //   }
+
+  //   const prefix = address.substr(0, 2 + prefixLength); // 2 for '0x'
+  //   const suffix = address.substr(-suffixLength);
+
+  //   return `${prefix}...${suffix}`;
+  // }
+
   return (
-    <div className="flex flex-row justify-between items-center gap-[72px] max-md:flex-col max-md:text-center">
-      <div className="text-6xl font-bold">Alchemy Simple AA Dapp</div>
-      <div className="flex flex-row items-center gap-[12px] max-md:flex-col max-md:text-center">
-        {isLoggedIn ? (
-          <a
-            href={`https://sepolia.etherscan.io/address/${scaAddress}`}
-            target="_blank"
-            className="btn text-white bg-gradient-1 disabled:text-white transition ease-in-out duration-500 transform hover:scale-110 max-md:w-full"
-          >
-            {username || "Logged In!"}
-          </a>
-        ) : (
-          <button
-            disabled={isLoggingIn}
-            onClick={openModal}
-            className="btn text-white bg-gradient-1 disabled:opacity-25 disabled:text-white transition ease-in-out duration-500 transform hover:scale-110 max-md:w-full"
-          >
-            {isLoggingIn ? "Logging In" : "Log In"} With Email
-            {isLoggingIn && (
-              <span className="loading loading-spinner loading-md"></span>
-            )}
-          </button>
-        )}
-        {isLoggedIn && (
-          <button
-            onClick={handleLogout}
-            className="btn text-white bg-gradient-2 disabled:opacity-25 disabled:text-white transition ease-in-out duration-500 transform hover:scale-110 max-md:w-full"
-          >
-            {isLoggingOut ? "Logging Out" : "Log Out"}
-            {isLoggingOut && (
-              <span className="loading loading-spinner loading-md"></span>
-            )}
-          </button>
-        )}
+    <div className="navbar font-mono mt-2 flex justify-between items-center">
+      <div className="flex-1 ml-3 md:ml-6">
+        <div className="cursor-pointer flex items-center">
+          <Image src={demoLogo} alt="logo" />
+        </div>
       </div>
 
+      {isLoggedIn ? (
+        <div className="mr-6">
+          <div className="md:mr-2.5">
+            <a
+              className="link link-primary hidden md:flex"
+              href={`https://sepolia.etherscan.io/address/${scaAddress}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {/* {truncateEthAddress(scaAddress)} */}
+              {scaAddress}
+            </a>
+          </div>
+          <div className="dropdown dropdown-end">
+            <img
+              src={generator.generateRandomAvatar(email!)}
+              tabIndex={0}
+              className="w-12 h-12 rounded-full align-middle cursor-pointer mr-2 mb-2"
+            />
+            <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 gap-2">
+              <li>
+                <a>{username}</a>
+              </li>
+              <li>
+                <a
+                  className="link link-primary block sm:hidden"
+                  href={`https://sepolia.etherscan.io/address/${scaAddress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {/* {truncateEthAddress(scaAddress as string)} */}
+                  {scaAddress}
+                </a>
+              </li>
+
+              <li>
+                <button className="btn btn-error" onClick={handleLogout}>
+                  <div className="mt-[7.5px]">Logout</div>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <div className="btn btn-primary text-white md:mr-4" onClick={openModal}>
+          Login
+        </div>
+      )}
       {/* login pop-up modal */}
       <dialog className={`modal ${isLoggingIn && "modal-open"}`}>
         <div className="modal-box flex flex-col gap-[12px]">
@@ -82,18 +126,18 @@ export default function Navbar() {
           <input
             placeholder="email"
             onChange={onEmailChange}
-            className="input border border-solid border-white"
+            className="input border border-solid border-gray-400"
           />
           <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px]">
             <button
               onClick={handleLogin}
-              className="btn bg-gradient-1 text-white transition ease-in-out duration-500 transform hover:scale-110"
+              className="btn bg-gradient-1transition ease-in-out duration-500 transform hover:scale-110"
             >
               Login
             </button>
             <button
               onClick={closeModal}
-              className="btn bg-gradient-2 text-white transition ease-in-out duration-500 transform hover:scale-110"
+              className="btn bg-gradient-2transition ease-in-out duration-500 transform hover:scale-110"
             >
               Close
             </button>
