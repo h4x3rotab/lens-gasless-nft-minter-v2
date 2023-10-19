@@ -27,7 +27,12 @@ export function Banner({
       return <StartAlertComponent />;
 
     case BANNER_STATES.MINT_SUCCESS:
-      return <SuccessAlertComponent message={successMessage} hash={txHash} />;
+      return (
+        <SuccessAlertComponent
+          message={"You successfully minted an NFT w/o paying gas!"}
+          hash={txHash}
+        />
+      );
 
     case BANNER_STATES.TRANSFER_SUCCESS:
       return (

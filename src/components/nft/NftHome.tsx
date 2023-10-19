@@ -18,7 +18,6 @@ export default function NftHome({
   userOpHash,
   txHash,
   setError,
-  setSuccessMessage,
 }: any) {
   const { login, isLoggedIn, provider } = useWalletContext();
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
@@ -47,7 +46,6 @@ export default function NftHome({
         setHasMinted(true);
         setTxHash(undefined);
         setUserOpHash(undefined);
-        setSuccessMessage("You successfully minted an NFT w/o paying gas!");
         setBannerState(BANNER_STATES.MINT_SUCCESS);
         handleScroll("wallet");
         console.log(txHash, txReceipt);
