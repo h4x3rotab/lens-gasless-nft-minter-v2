@@ -105,6 +105,7 @@ export const WalletContextProvider = ({
       const isLoggedIn = await magic.user.isLoggedIn();
 
       if (!isLoggedIn) {
+        setIsLoading(false);
         return;
       }
 
