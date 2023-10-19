@@ -51,7 +51,7 @@ export default function NftHome({
         }, 10000);
       }
     }
-  }, 5000);
+  }, 5100);
 
   const handleMint = useCallback(async () => {
     if (!provider) {
