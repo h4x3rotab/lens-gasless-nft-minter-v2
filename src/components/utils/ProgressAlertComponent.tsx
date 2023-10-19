@@ -15,7 +15,7 @@ export default function ProgressAlertComponent({ hash }: any) {
         >
           {/* Close Button */}
           <span
-            className="absolute top-0 right-0 cursor-pointer px-4 py-2"
+            className="absolute top-0 right-0 cursor-pointer px-4 py-2 text-black"
             onClick={handleAlertClick}
           >
             ×

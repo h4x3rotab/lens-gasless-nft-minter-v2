@@ -1,10 +1,6 @@
 import { useState } from "react";
 
-export default function SuccessAlertComponent({
-  message,
-  hash,
-  recipientAddress,
-}: any) {
+export default function SuccessAlertComponent({ message, hash }: any) {
   const [isVisible, setIsVisible] = useState(true);
 
   const handleAlertClick = () => {

@@ -30,6 +30,7 @@ export default function WalletDisplay({
   isMinting,
   setError,
   setBannerState,
+  setSuccessMessage,
 }: any) {
   const { provider } = useWalletContext();
 
@@ -115,6 +116,8 @@ export default function WalletDisplay({
     if (!provider) {
       throw new Error("Provider not initialized");
     }
+    console.log("in here");
+    console.log(recipientAddress);
     setIsTransferring(true);
     setBannerState(BANNER_STATES.MINT_STARTED);
 
@@ -130,9 +133,10 @@ export default function WalletDisplay({
       });
       setUserOpHash(uoHash.hash);
       setBannerState(BANNER_STATES.USER_OP_HASH);
+      setSuccessMessage(`You successfully sent an NFT to ${recipientAddress}`);
     } catch (e: any) {
       console.log(e);
-      setError(e.details);
+      setError(e.details || e.message);
       setBannerState(BANNER_STATES.ERROR);
       setIsTransferring(false);
 
@@ -146,7 +150,7 @@ export default function WalletDisplay({
         }),
       });
     }
-  }, [provider]);
+  }, [provider, recipientAddress]);
 
   function truncateDescription(description: string, wordCount: number) {
     const words = description.split(" ");
@@ -163,17 +167,19 @@ export default function WalletDisplay({
     );
   }
 
+  function handleRecipientInput(recipient: any) {
+    setRecipientAddress(recipient);
+  }
+
   return (
     <div className="mt-14 md:mt-32 mb-6 md:mb-16 mx-6 md:mx-20">
-      <div id="wallet" className="mb-6 font-mono text-3xl font-bold">
-        Your Wallet
-      </div>
+      <div className="mb-6 font-mono text-3xl font-bold">Your Wallet</div>
       {isLoading ? (
         <div className="flex items-center justify-center mt-[-320px] mb-16 md:mt-[-350px] md:mb-0">
           <Loader loadingMessage="Fetching your NFTs..." />
         </div>
       ) : ownedNftsArray && ownedNftsArray.length >= 1 ? (
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between" id="wallet">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-y-12 mb-6 mx-0">
             {ownedNftsArray &&
               Array.isArray(ownedNftsArray) &&
@@ -212,7 +218,7 @@ export default function WalletDisplay({
                             placeholder="Type here"
                             className="input input-bordered w-full mt-4"
                             onChange={(e) =>
-                              setRecipientAddress(e.target.value)
+                              handleRecipientInput(e.target.value)
                             }
                           />
 
@@ -244,7 +250,7 @@ export default function WalletDisplay({
         <div>
           {isMinting ? (
             <div className="flex items-center justify-center mt-[-320px] mb-16 md:mt-[-350px] md:mb-0">
-              {/* <Loader loadingMessage="Minting your NFT..." /> */}
+              <Loader loadingMessage="Minting your NFT..." />
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center md:mx-8 md:mt-12 text-xl">

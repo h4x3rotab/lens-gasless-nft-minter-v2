@@ -20,18 +20,14 @@ export function Banner({
   txHash,
   recipientAddress,
   errorMessage,
+  successMessage,
 }: any) {
   switch (state) {
     case BANNER_STATES.MINT_STARTED:
       return <StartAlertComponent />;
 
     case BANNER_STATES.MINT_SUCCESS:
-      return (
-        <SuccessAlertComponent
-          message={"You successfully minted an NFT w/o paying gas fees!"}
-          hash={txHash}
-        />
-      );
+      return <SuccessAlertComponent message={successMessage} hash={txHash} />;
 
     case BANNER_STATES.TRANSFER_SUCCESS:
       return (

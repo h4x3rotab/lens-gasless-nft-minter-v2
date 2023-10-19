@@ -1,6 +1,6 @@
 "use client";
 import { useWalletContext } from "@/context/wallet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NftHome from "./nft/NftHome";
 import WalletDisplay from "./nft/WalletDisplay";
 import { BANNER_STATES, Banner } from "./utils/Banner";
@@ -35,6 +35,13 @@ export default function Hero() {
   const [userOpHash, setUserOpHash] = useState("");
   const [txHash, setTxHash] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setBannerState(BANNER_STATES.NONE);
+    }, 5000);
+  }, [error]);
 
   return (
     <div>
@@ -49,12 +56,14 @@ export default function Hero() {
         userOpHash={userOpHash}
         txHash={txHash}
         setError={setError}
+        setSuccessMessage={setSuccessMessage}
       />
       <Banner
         state={bannerState}
         userOpHash={userOpHash}
         txHash={txHash}
         errorMessage={error}
+        successMessage={successMessage}
       />
       {isLoggedIn ? (
         <WalletDisplay
@@ -64,6 +73,7 @@ export default function Hero() {
           ownedNftsArray={ownedNftsArray}
           setOwnedNftsArray={setOwnedNftsArray}
           setError={setError}
+          setSuccessMessage={setSuccessMessage}
         />
       ) : (
         ""

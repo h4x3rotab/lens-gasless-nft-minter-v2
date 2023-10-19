@@ -87,11 +87,16 @@ export default function Navbar() {
             </a>
           </div>
           <div className="dropdown dropdown-end">
-            <img
-              src={generator.generateRandomAvatar(email)}
-              tabIndex={0}
-              className="w-12 h-12 rounded-full align-middle cursor-pointer mr-2 mb-2"
-            />
+            {scaAddress ? (
+              <img
+                src={generator.generateRandomAvatar(scaAddress)}
+                tabIndex={0}
+                className="w-12 h-12 rounded-full align-middle cursor-pointer mr-2 mb-2"
+              />
+            ) : (
+              ""
+            )}
+
             <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52 gap-2">
               <li>
                 <a>{username}</a>
