@@ -270,7 +270,7 @@ export default function NftHome({
               className="input border border-solid border-gray-400 w-full"
             />
 
-            <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px]">
+            <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px] mt-5">
               <button
                 type="button" // Specify the type so it doesn't trigger form submission
                 onClick={closeModal}
