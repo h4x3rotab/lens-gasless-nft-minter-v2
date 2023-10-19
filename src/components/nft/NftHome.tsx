@@ -43,11 +43,12 @@ export default function NftHome({
         });
 
         setIsMinting(false);
+        handleScroll("wallet");
         setHasMinted(true);
         setTxHash(undefined);
         setUserOpHash(undefined);
         setBannerState(BANNER_STATES.MINT_SUCCESS);
-        handleScroll("wallet");
+
         console.log(txHash, txReceipt);
         setTimeout(() => {
           setBannerState(BANNER_STATES.NONE);

@@ -166,13 +166,15 @@ export default function WalletDisplay({
 
   return (
     <div className="mt-14 md:mt-32 mb-6 md:mb-16 mx-6 md:mx-20">
-      <div className="mb-6 font-mono text-3xl font-bold">Your Wallet</div>
+      <div id="wallet" className="mb-6 font-mono text-3xl font-bold">
+        Your Wallet
+      </div>
       {isLoading ? (
         <div className="flex items-center justify-center mt-[-320px] mb-16 md:mt-[-350px] md:mb-0">
           <Loader loadingMessage="Fetching your NFTs..." />
         </div>
       ) : ownedNftsArray && ownedNftsArray.length >= 1 ? (
-        <div className="flex flex-col justify-between" id="wallet">
+        <div className="flex flex-col justify-between">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-y-12 mb-6 mx-0">
             {ownedNftsArray &&
               Array.isArray(ownedNftsArray) &&
