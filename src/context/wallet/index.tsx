@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/utils/Loader";
 import { entryPointAddress } from "@/config/client";
 import { useAlchemyProvider } from "@/hooks/useAlchemyProvider";
 import { useMagicSigner } from "@/hooks/useMagicSigner";
@@ -46,6 +47,7 @@ export const WalletContextProvider = ({
   const [scaAddress, setScaAddress] = useState<Address>();
   const [username, setUsername] = useState<string>();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { magic, signer } = useMagicSigner();
   const { provider, connectProviderToAccount, disconnectProviderFromAccount } =
@@ -53,6 +55,7 @@ export const WalletContextProvider = ({
 
   const login = useCallback(
     async (email: string) => {
+      setIsLoading(true);
       if (!magic || !magic.user || !signer) {
         throw new Error("Magic not initialized");
       }
@@ -64,14 +67,17 @@ export const WalletContextProvider = ({
       if (!didToken || !metadata.publicAddress || !metadata.email) {
         throw new Error("Magic login failed");
       }
-
-      setIsLoggedIn(true);
       connectProviderToAccount(signer);
       setUsername(metadata.email);
       setOwnerAddress(metadata.publicAddress as Address);
+
+      setIsLoggedIn(true);
+      console.log("here");
+      setIsLoading(false);
+
       setScaAddress(await provider.getAddress());
     },
-    [magic, connectProviderToAccount, signer, provider]
+    [magic, connectProviderToAccount, signer, provider, isLoading]
   );
 
   const logout = useCallback(async () => {
@@ -102,7 +108,7 @@ export const WalletContextProvider = ({
         return;
       }
 
-      const metadata = await magic.user.getMetadata();
+      const metadata = await magic.user.getInfo();
       if (!metadata.publicAddress || !metadata.email) {
         throw new Error("Magic login failed");
       }
@@ -111,10 +117,15 @@ export const WalletContextProvider = ({
       connectProviderToAccount(signer);
       setUsername(metadata.email);
       setOwnerAddress(metadata.publicAddress as Address);
+      setIsLoading(false);
       setScaAddress(await provider.getAddress());
     }
     fetchData();
   }, [magic, connectProviderToAccount, signer, provider]);
+
+  if (isLoading) {
+    return <Loader loadingMessage={"Loading..."} />;
+  }
 
   return (
     <WalletContext.Provider

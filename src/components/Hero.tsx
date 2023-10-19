@@ -34,7 +34,7 @@ export default function Hero() {
     setTimeout(() => {
       setBannerState(BANNER_STATES.NONE);
     }, 5000);
-  }, [error]);
+  }, [error, successMessage]);
 
   return (
     <div>

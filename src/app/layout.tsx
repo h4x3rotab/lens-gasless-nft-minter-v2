@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Alchemy Simple AA Dapp",
-  description: "A Simple Dapp That Uses Account Abstraction",
+  title: "Account Kit Demo",
+  description: "A Gasless NFT Minter That Uses Alchemy's Account Kit",
 };
 
 export default function RootLayout({

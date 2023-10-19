@@ -40,7 +40,7 @@ export default function WalletDisplay({
   const [isTransferring, setIsTransferring] = useState(false);
   const [userOpHash, setUserOpHash] = useState("");
   const [txHash, setTxHash] = useState("");
-  const [hasTransferred, setHasTransferred] = useState(false);
+  const [, setHasTransferred] = useState(false);
 
   useInterval(async () => {
     if (isTransferring && !txHash && userOpHash && provider) {
@@ -67,9 +67,6 @@ export default function WalletDisplay({
         handleScroll("wallet");
         fetchUserNfts();
         console.log(txHash, txReceipt);
-        setTimeout(() => {
-          setBannerState(BANNER_STATES.NONE);
-        }, 10000);
       }
     }
   }, 4000);
