@@ -39,8 +39,9 @@ export default function SuccessAlertComponent({ message, hash }: any) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Check out your transaction on Etherscan.
+                Check out your transaction on Etherscan
               </a>
+              .
             </span>
           </div>
         </div>

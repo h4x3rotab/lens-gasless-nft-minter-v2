@@ -29,12 +29,23 @@ export default function Hero() {
   const [txHash, setTxHash] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [recipientAddress, setRecipientAddress] = useState("");
+  const [hasTransferred, setHasTransferred] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setBannerState(BANNER_STATES.NONE);
-    }, 5000);
-  }, [error, successMessage]);
+    let timer: any;
+
+    if (hasTransferred || hasMinted || error) {
+      timer = setTimeout(() => {
+        setBannerState(BANNER_STATES.NONE);
+        setError("");
+      }, 6500);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [hasMinted, error, hasTransferred]);
 
   return (
     <div>
@@ -57,6 +68,7 @@ export default function Hero() {
         txHash={txHash}
         errorMessage={error}
         successMessage={successMessage}
+        recipientAddress={recipientAddress}
       />
       {isLoggedIn ? (
         <WalletDisplay
@@ -66,7 +78,9 @@ export default function Hero() {
           ownedNftsArray={ownedNftsArray}
           setOwnedNftsArray={setOwnedNftsArray}
           setError={setError}
-          setSuccessMessage={setSuccessMessage}
+          recipientAddress={recipientAddress}
+          setRecipientAddress={setRecipientAddress}
+          setHasTransferred={setHasTransferred}
         />
       ) : (
         ""

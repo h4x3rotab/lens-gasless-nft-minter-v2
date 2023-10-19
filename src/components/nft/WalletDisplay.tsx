@@ -30,17 +30,17 @@ export default function WalletDisplay({
   isMinting,
   setError,
   setBannerState,
-  setSuccessMessage,
+  recipientAddress,
+  setRecipientAddress,
+  setHasTransferred,
 }: any) {
   const { provider } = useWalletContext();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [recipientAddress, setRecipientAddress] = useState("");
   const [transferNftTokenId, setTransferNftTokenId] = useState(-1);
   const [isTransferring, setIsTransferring] = useState(false);
   const [userOpHash, setUserOpHash] = useState("");
   const [txHash, setTxHash] = useState("");
-  const [, setHasTransferred] = useState(false);
 
   useInterval(async () => {
     if (isTransferring && !txHash && userOpHash && provider) {
@@ -63,7 +63,7 @@ export default function WalletDisplay({
 
         setIsTransferring(false);
         setHasTransferred(true);
-        setBannerState(BANNER_STATES.MINT_SUCCESS);
+        setBannerState(BANNER_STATES.TRANSFER_SUCCESS);
         handleScroll("wallet");
         fetchUserNfts();
         console.log(txHash, txReceipt);
@@ -113,13 +113,10 @@ export default function WalletDisplay({
     if (!provider) {
       throw new Error("Provider not initialized");
     }
-    console.log("in here");
-    console.log(recipientAddress);
     setIsTransferring(true);
     setBannerState(BANNER_STATES.MINT_STARTED);
 
     try {
-      console.log(recipientAddress);
       const uoHash = await provider.sendUserOperation({
         target: nftContractAddress,
         data: encodeFunctionData({
@@ -130,7 +127,6 @@ export default function WalletDisplay({
       });
       setUserOpHash(uoHash.hash);
       setBannerState(BANNER_STATES.USER_OP_HASH);
-      setSuccessMessage(`You successfully sent an NFT to ${recipientAddress}`);
     } catch (e: any) {
       console.log(e);
       setError(e.details || e.message);
