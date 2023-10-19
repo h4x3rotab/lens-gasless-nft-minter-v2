@@ -9,7 +9,6 @@ import { Transaction, encodeFunctionData } from "viem";
 import { BANNER_STATES } from "../utils/Banner";
 
 export default function NftHome({
-  hasMinted,
   setHasMinted,
   isMinting,
   setIsMinting,
@@ -38,7 +37,7 @@ export default function NftHome({
 
         setTxHash(txHash);
         setBannerState(BANNER_STATES.TX_HASH);
-        // Once the txHash is retrieved, you can use it for the next promise
+
         const txReceipt = await provider.rpcClient.waitForTransactionReceipt({
           hash: txHash,
         });
@@ -78,7 +77,7 @@ export default function NftHome({
       setBannerState(BANNER_STATES.USER_OP_HASH);
     } catch (e: any) {
       console.log(e);
-      setError(e.details);
+      setError(e.details || e.message);
       setBannerState(BANNER_STATES.ERROR);
       setIsMinting(false);
 
@@ -117,12 +116,16 @@ export default function NftHome({
     []
   );
 
-  const handleLogin = useCallback(async () => {
-    await login(email);
-    setIsLoggingIn(false);
-    setEmail("");
-    closeModal();
-  }, [login, email]);
+  const handleLogin = useCallback(
+    async (event: any) => {
+      event.preventDefault();
+      await login(email);
+      setIsLoggingIn(false);
+      setEmail(email);
+      closeModal();
+    },
+    [login, email]
+  );
 
   return (
     <div>
@@ -258,13 +261,13 @@ export default function NftHome({
       </div>
       <dialog className={`modal ${isLoggingIn && "modal-open"}`}>
         <div className="modal-box flex flex-col gap-[12px]">
-          <h3 className="font-bold text-lg">Enter your email!</h3>
+          <h3 className="font-bold text-lg">Enter your email address:</h3>
 
           <form onSubmit={handleLogin}>
             <input
               placeholder="email"
               onChange={onEmailChange}
-              className="input border border-solid border-gray-400"
+              className="input border border-solid border-gray-400 w-full"
             />
 
             <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px]">

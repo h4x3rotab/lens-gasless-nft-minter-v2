@@ -44,7 +44,7 @@ export default function WalletDisplay({
 
   useInterval(async () => {
     if (isTransferring && !txHash && userOpHash && provider) {
-      console.log("in interval useeffect for UO: ", userOpHash);
+      console.log("In interval useEffect for UO: ", userOpHash);
       const receipt = await provider
         .getUserOperationReceipt(userOpHash as `0x${string}`)
         .catch(() => null);
@@ -52,11 +52,11 @@ export default function WalletDisplay({
         const txHash = await provider
           .getTransaction(receipt.receipt.transactionHash)
           .then((x: any) => (x as Transaction).hash);
-        console.log("UserOp mined. tx", txHash);
+        console.log("UserOp mined. Tx: ", txHash);
 
         setTxHash(txHash);
         setBannerState(BANNER_STATES.TX_HASH);
-        // Once the txHash is retrieved, you can use it for the next promise
+
         const txReceipt = await provider.rpcClient.waitForTransactionReceipt({
           hash: txHash,
         });

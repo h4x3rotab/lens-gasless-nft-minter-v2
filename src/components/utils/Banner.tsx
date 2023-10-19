@@ -44,7 +44,7 @@ export function Banner({
       return <ProgressAlertComponent hash={userOpHash} />;
 
     case BANNER_STATES.TX_HASH:
-      return <ProgressAlertComponent hash={txHash} />;
+      return <SuccessAlertComponent hash={txHash} />;
 
     case BANNER_STATES.ERROR:
       return <ErrorAlertComponent />;

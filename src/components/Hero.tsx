@@ -19,15 +19,8 @@ interface Data {
   length: number;
 }
 
-type MintStatus =
-  | "Mint"
-  | "Requesting"
-  | "Minting"
-  | "Received"
-  | "Error Minting";
-
 export default function Hero() {
-  const { isLoggedIn, provider } = useWalletContext();
+  const { isLoggedIn } = useWalletContext();
   const [ownedNftsArray, setOwnedNftsArray] = useState<Data | null>(null);
   const [hasMinted, setHasMinted] = useState(false);
   const [isMinting, setIsMinting] = useState(false);
