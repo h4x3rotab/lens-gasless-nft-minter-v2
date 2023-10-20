@@ -138,7 +138,7 @@ export default function NftHome({
           <img
             src="https://raw.githubusercontent.com/AlvaroLuken/cryptopunks/main/accountkit.jpg"
             alt="sample nft"
-            className="rounded-lg h-auto max-w-md lg:min-w-[540px] px-12 md:px-0 lg:max-h-[850px]"
+            className="rounded-lg h-auto max-w-full lg:min-w-[540px] px-12 md:px-0 lg:max-h-[850px]"
           />
         </div>
         <div className="flex flex-col items-center gap-y-5 lg:mt-16">
