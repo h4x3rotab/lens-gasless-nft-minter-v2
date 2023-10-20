@@ -51,9 +51,6 @@ export function Banner({
     case BANNER_STATES.TX_HASH:
       return <SuccessAlertComponent hash={txHash} />;
 
-    case BANNER_STATES.ERROR:
-      return <ErrorAlertComponent />;
-
     default:
       return null; // No banner for the 'NONE' state or any unhandled state.
   }

@@ -197,7 +197,7 @@ export default function WalletDisplay({
                     <p>{truncateDescription(nft.description, 25)}</p>
                     <div className="flex justify-end">
                       <button
-                        className="btn btn-secondary text-white mt-3"
+                        className="btn btn-secondary text-white mt-3 w-full"
                         id={nft.tokenId}
                         onClick={constructNftTransfer}
                       >
