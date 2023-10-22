@@ -99,6 +99,7 @@ export const WalletContextProvider = ({
   useEffect(() => {
     async function fetchData() {
       if (!magic || !magic.user || !signer) {
+        setIsLoading(false);
         throw new Error("Magic not initialized");
       }
 
