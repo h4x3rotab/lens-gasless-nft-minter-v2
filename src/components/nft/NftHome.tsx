@@ -141,7 +141,7 @@ export default function NftHome({
             className="rounded-lg h-auto max-w-full lg:min-w-[540px] px-12 md:px-0 lg:max-h-[850px]"
           />
         </div>
-        <div className="flex flex-col items-center gap-y-5 lg:mt-16">
+        <div className="flex flex-col items-center gap-y-5 lg:mt-16 mb-24 lg:mb-0">
           <div
             className="relative inline-flex group float-on-hover"
             onClick={() => (isLoggedIn ? handleMint() : openModal())}
