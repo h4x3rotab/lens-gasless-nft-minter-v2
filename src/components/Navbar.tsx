@@ -83,7 +83,7 @@ export default function Navbar() {
           <div className="md:mr-2.5">
             <a
               className="link link-primary hidden md:flex"
-              href={`https://sepolia.etherscan.io/address/${scaAddress}`}
+              href={`https://testnet.arbiscan.io/address/${scaAddress}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -108,7 +108,7 @@ export default function Navbar() {
               <li>
                 <a
                   className="link link-primary block sm:hidden"
-                  href={`https://sepolia.etherscan.io/address/${scaAddress}`}
+                  href={`https://testnet.arbiscan.io/address/${scaAddress}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -22,7 +22,6 @@ export default function ProgressAlertComponent({ hash }: any) {
           </span>
           <p className="font-bold">Your user operation is being mined! ⛏️</p>
           <div className="flex items-center">
-            This may take a few seconds, depending on network activity. ⏱️&nbsp;
             <a
               href={`https://www.jiffyscan.xyz/userOpHash/${hash}?network=sepolia`}
               className="link"

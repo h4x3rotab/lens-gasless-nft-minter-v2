@@ -32,14 +32,14 @@ export default function SuccessAlertComponent({ message, hash }: any) {
               </svg>
             </div>
             <span>
-              {message}{" "}
+              <p className="font-bold">{message} </p>
               <a
-                href={`https://sepolia.etherscan.io/tx/${hash}`}
+                href={`https://testnet.arbiscan.io/tx/${hash}`}
                 className="link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Check out your transaction on Etherscan
+                Check out your transaction on Arbiscan
               </a>
               .
             </span>

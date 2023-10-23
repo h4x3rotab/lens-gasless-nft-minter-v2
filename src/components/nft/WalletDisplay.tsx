@@ -9,20 +9,6 @@ import { Transaction, encodeFunctionData } from "viem";
 import { BANNER_STATES } from "../utils/Banner";
 import Loader from "../utils/Loader";
 
-interface Nft {
-  contract: object;
-  tokenId: string;
-  tokenType: string;
-  title: string;
-  description: string;
-  media: object;
-}
-
-interface Data {
-  ownedNfts: Nft[];
-  length: number;
-}
-
 export default function WalletDisplay({
   hasMinted,
   ownedNftsArray,
@@ -165,7 +151,7 @@ export default function WalletDisplay({
   }
 
   return (
-    <div className="mt-14 md:mt-32 mb-6 md:mb-16 mx-6 md:mx-20">
+    <div className="mt-6 md:mt-32 mb-6 md:mb-16 mx-6 md:mx-20">
       <div id="wallet" className="mb-6 font-mono text-3xl font-bold">
         Your Wallet
       </div>

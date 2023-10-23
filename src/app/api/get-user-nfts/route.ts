@@ -4,7 +4,7 @@ const { Alchemy, Network } = require("alchemy-sdk");
 
 const alchemy = new Alchemy({
   url: process.env.ALCHEMY_API_URL,
-  network: Network.ETH_SEPOLIA,
+  network: Network.ARB_GOERLI,
 });
 
 export async function POST(request: NextRequest) {

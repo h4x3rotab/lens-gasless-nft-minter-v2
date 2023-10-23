@@ -45,7 +45,6 @@ export default function NftHome({
         setIsMinting(false);
         handleScroll("wallet");
         setHasMinted(true);
-        setTxHash(undefined);
         setUserOpHash(undefined);
         setBannerState(BANNER_STATES.MINT_SUCCESS);
 
@@ -55,13 +54,14 @@ export default function NftHome({
         }, 10000);
       }
     }
-  }, 5100);
+  }, 3000);
 
   const handleMint = useCallback(async () => {
     if (!provider) {
       throw new Error("Provider not initialized");
     }
     setHasMinted(false);
+    setTxHash(undefined);
     setIsMinting(true);
     setBannerState(BANNER_STATES.MINT_STARTED);
 
@@ -76,9 +76,7 @@ export default function NftHome({
       });
 
       setUserOpHash(uoHash.hash);
-      setTimeout(() => {
-        setBannerState(BANNER_STATES.USER_OP_HASH);
-      }, 5000);
+      setBannerState(BANNER_STATES.USER_OP_HASH);
     } catch (e: any) {
       console.log(e);
       setError(e.details || e.message);

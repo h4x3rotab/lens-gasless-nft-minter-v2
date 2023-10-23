@@ -39,7 +39,7 @@ export default function Hero() {
       timer = setTimeout(() => {
         setBannerState(BANNER_STATES.NONE);
         setError("");
-      }, 6500);
+      }, 10000);
     }
 
     return () => {

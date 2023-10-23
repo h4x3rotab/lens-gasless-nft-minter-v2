@@ -49,7 +49,7 @@ export function Banner({
       return <ProgressAlertComponent hash={userOpHash} />;
 
     case BANNER_STATES.TX_HASH:
-      return <SuccessAlertComponent hash={txHash} />;
+      return <ProgressAlertComponent hash={txHash} />;
 
     default:
       return null; // No banner for the 'NONE' state or any unhandled state.
