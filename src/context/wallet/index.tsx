@@ -131,7 +131,7 @@ export const WalletContextProvider = ({
     return (
       <div>
         <DummyNavbar />
-          <Loader loadingMessage={"Loading"} />
+        <Loader loadingMessage={"Loading"} />
         <DummyFooter />
       </div>
     );

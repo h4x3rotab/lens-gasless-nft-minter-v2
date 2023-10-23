@@ -21,7 +21,7 @@ export default function ProgressAlertComponent({ hash }: any) {
             ×
           </span>
           <p className="font-bold">Your user operation is being mined! ⛏️</p>
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <a
               href={`https://www.jiffyscan.xyz/userOpHash/${hash}?network=sepolia`}
               className="link"
@@ -31,7 +31,7 @@ export default function ProgressAlertComponent({ hash }: any) {
               Check out your user op&apos;s progress here.
             </a>
             <span className="ml-2 loading loading-dots loading-md"></span>
-          </div>
+          </div> */}
         </div>
       </div>
     )
