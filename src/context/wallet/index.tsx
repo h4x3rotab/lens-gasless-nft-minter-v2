@@ -1,4 +1,6 @@
 "use client";
+import DummyFooter from "@/components/utils/DummyFooter";
+import DummyNavbar from "@/components/utils/DummyNavbar";
 import Loader from "@/components/utils/Loader";
 import { entryPointAddress } from "@/config/client";
 import { useAlchemyProvider } from "@/hooks/useAlchemyProvider";
@@ -126,7 +128,13 @@ export const WalletContextProvider = ({
   }, [magic, connectProviderToAccount, signer, provider]);
 
   if (isLoading) {
-    return <Loader loadingMessage={"Loading"} />;
+    return (
+      <div>
+        <DummyNavbar />
+          <Loader loadingMessage={"Loading"} />
+        <DummyFooter />
+      </div>
+    );
   }
 
   return (
