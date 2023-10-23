@@ -290,15 +290,6 @@ export default function NftHome({
           </form>
         </div>
       </dialog>
-
-      {/* {displayStartBanner && !userOpHash ? <StartAlertComponent /> : ""} */}
-      {/* {displayStartBanner && !hasMinted ? (
-        <ProgressAlertComponent hash={userOpHash} />
-      ) : (
-        ""
-      )} */}
-      {/* {hasMinted ? <SuccessAlertComponent hash={txHash} /> : ""} */}
-      {/* {error ? <ErrorAlertComponent errorMessage={error} /> : ""} */}
     </div>
   );
 }
