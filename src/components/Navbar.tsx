@@ -7,7 +7,7 @@ import demoLogo from "../../public/assets/demo_logo.svg";
 
 export default function Navbar() {
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
-  const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
+  const [, setIsLoggingOut] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const generator = new AvatarGenerator();
 
@@ -139,7 +139,6 @@ export default function Navbar() {
               onChange={onEmailChange}
               className="input border border-solid border-gray-400 w-full"
             />
-
             <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px] mt-5">
               <button
                 type="button" // Specify the type so it doesn't trigger form submission
