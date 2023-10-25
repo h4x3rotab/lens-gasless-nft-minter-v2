@@ -282,7 +282,7 @@ export default function NftHome({
               </button>
               <button
                 type="submit" // This will submit the form
-                className="btn bg-gradient-1transition ease-in-out duration-500 transform hover:scale-110"
+                className="btn btn-primary text-white bg-gradient-1transition ease-in-out duration-500 transform hover:scale-110"
               >
                 Login
               </button>
