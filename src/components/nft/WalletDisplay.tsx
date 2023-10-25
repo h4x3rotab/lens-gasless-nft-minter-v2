@@ -151,7 +151,7 @@ export default function WalletDisplay({
   }
 
   return (
-    <div className="mt-2 md:mt-32 mb-6 md:mb-16 mx-6 md:mx-20">
+    <div className="mt-2 mb-6 md:my-16 mx-6 md:mx-20">
       <div id="wallet" className="mb-6 font-mono text-3xl font-bold">
         Your Wallet
       </div>

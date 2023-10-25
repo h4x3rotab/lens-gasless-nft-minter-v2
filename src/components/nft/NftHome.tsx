@@ -131,7 +131,7 @@ export default function NftHome({
 
   return (
     <div>
-      <div className="relative flex flex-col md:flex-row gap-10 md:gap-20 mx-6 md:mx-20 mt-12">
+      <div className="relative mb-[-48px] md:mb-0 flex flex-col md:flex-row gap-10 md:gap-20 mx-6 md:mx-20 mt-12">
         <div className="flex items-center justify-center">
           <img
             src="https://raw.githubusercontent.com/AlvaroLuken/cryptopunks/main/accountkit.jpg"
