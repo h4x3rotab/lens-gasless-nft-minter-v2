@@ -123,9 +123,9 @@ export default function WalletDisplay({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: e.message,
           name: e.name,
-          stack: e.stack,
+          message: e.message,
+          // stack: e.stack,
         }),
       });
     }
