@@ -53,6 +53,9 @@ export default function WalletDisplay({
         handleScroll("wallet");
         fetchUserNfts();
         console.log(txHash, txReceipt);
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
       }
     }
   }, 4000);
@@ -100,6 +103,7 @@ export default function WalletDisplay({
       throw new Error("Provider not initialized");
     }
     setIsTransferring(true);
+    console.log(transferNftTokenId);
     setBannerState(BANNER_STATES.MINT_STARTED);
 
     try {
@@ -143,7 +147,10 @@ export default function WalletDisplay({
 
   if (isTransferring) {
     return (
-      <Loader loadingMessage={`Transferring your NFT to ${recipientAddress}`} />
+      <Loader
+        isTransfer={true}
+        loadingMessage={`Transferring your NFT to ${recipientAddress}`}
+      />
     );
   }
 
@@ -158,7 +165,7 @@ export default function WalletDisplay({
       </div>
       {isLoading ? (
         <div className="flex items-center justify-center mt-[-320px] mb-16 md:mt-[-350px] md:mb-0">
-          <Loader loadingMessage="Fetching your NFTs..." />
+          <Loader isTransfer={true} loadingMessage="Fetching your NFTs..." />
         </div>
       ) : ownedNftsArray && ownedNftsArray.length >= 1 ? (
         <div className="flex flex-col justify-between">
@@ -208,6 +215,7 @@ export default function WalletDisplay({
                           <div className="modal-action">
                             <form method="dialog">
                               <button
+                                type="submit"
                                 id={nft.tokenId}
                                 onClick={finalizeNftTransfer}
                                 className="btn btn-primary text-white"

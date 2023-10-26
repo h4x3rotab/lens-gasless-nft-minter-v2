@@ -16,10 +16,10 @@ export default function StartAlertComponent() {
         >
           {/* Close Button */}
           <span
-            className="absolute top-0 right-0 cursor-pointer px-4 py-2"
+            className="absolute top-2 right-2 cursor-pointer bg-blue-200 hover:bg-blue-300 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center shadow-md transform hover:scale-105 transition-transform duration-200"
             onClick={handleAlertClick}
           >
-            ×
+            <div className="mb-1">x</div>
           </span>
           <p className="font-bold">
             Your user operation has been sent to the blockchain! ⛓️

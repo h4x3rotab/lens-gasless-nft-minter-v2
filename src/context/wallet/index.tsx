@@ -74,7 +74,6 @@ export const WalletContextProvider = ({
       setOwnerAddress(metadata.publicAddress as Address);
 
       setIsLoggedIn(true);
-      console.log("here");
       setIsLoading(false);
 
       setScaAddress(await provider.getAddress());
@@ -131,7 +130,7 @@ export const WalletContextProvider = ({
     return (
       <div>
         <Navbar />
-        <Loader loadingMessage={"Loading"} />
+        <Loader isTransfer={false} loadingMessage={"Loading"} />
         <Footer />
       </div>
     );

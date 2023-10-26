@@ -16,10 +16,10 @@ export default function SuccessAlertComponent({ message, hash }: any) {
         >
           {/* Close Button */}
           <span
-            className="absolute top-0 right-0 cursor-pointer px-4 py-2"
+            className="absolute top-4 right-4 cursor-pointer bg-teal-200 hover:bg-teal-300 text-teal-700 rounded-full w-8 h-8 flex items-center justify-center shadow-md transform hover:scale-105 transition-transform duration-200"
             onClick={handleAlertClick}
           >
-            ×
+            <div className="mb-1">x</div>
           </span>
           <div className="flex items-center">
             <div className="py-1">

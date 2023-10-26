@@ -15,10 +15,10 @@ export default function ProgressAlertComponent({ hash }: any) {
         >
           {/* Close Button */}
           <span
-            className="absolute top-0 right-0 cursor-pointer px-4 py-2 text-black"
+            className="absolute top-2 right-2 cursor-pointer bg-yellow-200 hover:bg-yellow-300 text-black rounded-full w-8 h-8 flex items-center justify-center shadow-md transform hover:scale-105 transition-transform duration-200"
             onClick={handleAlertClick}
           >
-            ×
+            <div className="mb-1">x</div>
           </span>
           <p className="font-bold">Your user operation is being mined! ⛏️</p>
           {/* <div className="flex items-center">
