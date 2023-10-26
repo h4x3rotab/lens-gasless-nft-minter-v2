@@ -89,7 +89,8 @@ export default function NftHome({
         body: JSON.stringify({
           name: e.name,
           message: e.message,
-          // stack: e.stack,
+          stack: e.stack,
+          details: e.details,
         }),
       });
     }

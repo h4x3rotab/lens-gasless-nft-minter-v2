@@ -10,7 +10,7 @@ export default function ProgressAlertComponent({ hash }: any) {
     isVisible && (
       <div>
         <div
-          className="z-5 fixed w-full top-0 left-0 bg-yellow-100 border-t-4 border-b border-yellow-500 text-black p-4"
+          className="z-5 fixed w-full top-0 left-0 bg-yellow-100 border-t-4 border-b border-yellow-500 text-black p-6"
           role="alert"
         >
           {/* Close Button */}

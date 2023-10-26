@@ -125,7 +125,8 @@ export default function WalletDisplay({
         body: JSON.stringify({
           name: e.name,
           message: e.message,
-          // stack: e.stack,
+          stack: e.stack,
+          details: e.details,
         }),
       });
     }

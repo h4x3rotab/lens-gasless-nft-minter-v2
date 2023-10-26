@@ -3,13 +3,18 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { name, message, stack } = body;
+  const { name, message, stack, details } = body;
+  console.log(details);
   const data = {
     name,
     message,
     stack,
   };
-  sendToSlack(data);
+  if (
+    details.trim().toLowerCase() !== "each address can only mint two tokens"
+  ) {
+    sendToSlack(data);
+  }
   try {
     return NextResponse.json({ message: "This Worked", success: true });
   } catch (err) {
