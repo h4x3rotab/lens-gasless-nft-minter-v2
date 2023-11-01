@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const { Alchemy, Network } = require("alchemy-sdk");
 
 const alchemy = new Alchemy({
-  url: process.env.ALCHEMY_API_URL,
+  url: process.env.ALCHEMY_RPC_URL,
   network: Network.ARB_GOERLI,
 });
 
