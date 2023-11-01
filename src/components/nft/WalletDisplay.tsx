@@ -81,6 +81,7 @@ export default function WalletDisplay({
         body: JSON.stringify(data),
       });
       const messageResponse = await response.json();
+      console.log(messageResponse);
       setOwnedNftsArray(messageResponse.data.ownedNfts);
     } catch (e: any) {
       setError(e.details);
@@ -103,7 +104,6 @@ export default function WalletDisplay({
       throw new Error("Provider not initialized");
     }
     setIsTransferring(true);
-    console.log(transferNftTokenId);
     setBannerState(BANNER_STATES.MINT_STARTED);
 
     try {
