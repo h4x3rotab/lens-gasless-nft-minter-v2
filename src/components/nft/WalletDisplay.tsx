@@ -180,9 +180,9 @@ export default function WalletDisplay({
                   <figure>
                     <img
                       src={
-                        "https://raw.githubusercontent.com/AlvaroLuken/cryptopunks/main/accountkit.jpg"
+                        "https://static.alchemyapi.io/assets/accountkit/accountkit.jpg"
                       }
-                      alt="user nft imagee"
+                      alt="user nft image"
                       className="w-full max-h-[300px]"
                     />
                   </figure>

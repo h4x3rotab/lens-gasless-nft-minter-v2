@@ -1,4 +1,3 @@
-import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -12,7 +11,8 @@ export async function POST(request: NextRequest) {
   if (
     details.trim().toLowerCase() !== "each address can only mint two tokens"
   ) {
-    sendToSlack(data);
+    console.log(data);
+    // sendToSlack(data);
   }
   try {
     return NextResponse.json({ message: "This Worked", success: true });
@@ -22,15 +22,15 @@ export async function POST(request: NextRequest) {
   }
 }
 
-const sendToSlack = async (message: any) => {
-  try {
-    await axios.post(
-      `https://hooks.zapier.com/hooks/catch${process.env.ZAPIER_WEBHOOK_PATH}`,
-      {
-        text: message,
-      }
-    );
-  } catch (error) {
-    console.error("Failed to send error to Slack", error);
-  }
-};
+// const sendToSlack = async (message: any) => {
+//   try {
+//     await axios.post(
+//       `https://hooks.zapier.com/hooks/catch${process.env.ZAPIER_WEBHOOK_PATH}`,
+//       {
+//         text: message,
+//       }
+//     );
+//   } catch (error) {
+//     console.error("Failed to send error to Slack", error);
+//   }
+// };
