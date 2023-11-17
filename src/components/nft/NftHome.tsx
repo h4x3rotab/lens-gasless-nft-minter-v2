@@ -28,7 +28,6 @@ export default function NftHome({
 
   useInterval(async () => {
     if (isMinting && !txHash && userOpHash && provider) {
-      console.log("in interval useeffect for UO: ", userOpHash);
       const receipt = await provider
         .getUserOperationReceipt(userOpHash as `0x${string}`)
         .catch(() => null);
@@ -36,7 +35,6 @@ export default function NftHome({
         const txHash = await provider
           .getTransaction(receipt.receipt.transactionHash)
           .then((x: any) => (x as Transaction).hash);
-        console.log("UserOp mined. tx", txHash);
 
         setTxHash(txHash);
         setBannerState(BANNER_STATES.TX_HASH);
@@ -51,7 +49,6 @@ export default function NftHome({
         setUserOpHash(undefined);
         setBannerState(BANNER_STATES.MINT_SUCCESS);
 
-        console.log(txHash, txReceipt);
         setTimeout(() => {
           setBannerState(BANNER_STATES.NONE);
         }, 10000);
@@ -81,23 +78,19 @@ export default function NftHome({
       setUserOpHash(uoHash.hash);
       setBannerState(BANNER_STATES.USER_OP_HASH);
     } catch (e: any) {
-      console.log(e);
       setError(e.details || e.message);
       setBannerState(BANNER_STATES.ERROR);
       setIsMinting(false);
-
-      fetch("/api/log-error-to-slack/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: e.name,
-          message: e.message,
-          stack: e.stack,
-          details: e.details,
-        }),
-      });
     }
-  }, [provider]);
+  }, [
+    provider,
+    setBannerState,
+    setError,
+    setHasMinted,
+    setIsMinting,
+    setTxHash,
+    setUserOpHash,
+  ]);
 
   const handleScroll = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -130,17 +123,19 @@ export default function NftHome({
       setEmail(email);
       closeModal();
     },
-    [login, email]
+    [login, email, closeModal]
   );
 
   return (
     <div>
       <div className="relative mb-[-48px] md:mb-0 flex flex-col md:flex-row gap-10 md:gap-20 mx-6 md:mx-20 mt-12">
         <div className="flex items-center justify-center">
-          <img
+          <Image
             src="https://raw.githubusercontent.com/AlvaroLuken/cryptopunks/main/accountkit.jpg"
             alt="sample nft"
             className="rounded-lg h-auto max-w-full lg:min-w-[540px] px-12 md:px-0 lg:max-h-[850px]"
+            width={540}
+            height={850}
           />
         </div>
         <div className="flex flex-col items-center gap-y-5 lg:mt-16 mb-24 lg:mb-0">

@@ -11,7 +11,6 @@ export const BANNER_STATES = {
   ERROR: "ERROR",
   USER_OP_HASH: "USER_OP_HASH",
   TX_HASH: "TX_HASH",
-  // ... add other states as needed
 };
 
 export function Banner({
@@ -52,6 +51,6 @@ export function Banner({
       return <ProgressAlertComponent hash={txHash} />;
 
     default:
-      return null; // No banner for the 'NONE' state or any unhandled state.
+      return null;
   }
 }

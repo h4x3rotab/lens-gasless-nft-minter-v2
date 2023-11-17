@@ -4,6 +4,7 @@ import {
 } from "@/config/token-contract";
 import { useWalletContext } from "@/context/wallet";
 import { useInterval } from "@/hooks/useInterval";
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { Transaction, encodeFunctionData } from "viem";
 import { BANNER_STATES } from "../utils/Banner";
@@ -30,7 +31,6 @@ export default function WalletDisplay({
 
   useInterval(async () => {
     if (isTransferring && !txHash && userOpHash && provider) {
-      console.log("In interval useEffect for UO: ", userOpHash);
       const receipt = await provider
         .getUserOperationReceipt(userOpHash as `0x${string}`)
         .catch(() => null);
@@ -38,7 +38,6 @@ export default function WalletDisplay({
         const txHash = await provider
           .getTransaction(receipt.receipt.transactionHash)
           .then((x: any) => (x as Transaction).hash);
-        console.log("UserOp mined. Tx: ", txHash);
 
         setTxHash(txHash);
         setBannerState(BANNER_STATES.TX_HASH);
@@ -52,7 +51,6 @@ export default function WalletDisplay({
         setBannerState(BANNER_STATES.TRANSFER_SUCCESS);
         handleScroll("wallet");
         fetchUserNfts();
-        console.log(txHash, txReceipt);
         setTimeout(() => {
           location.reload();
         }, 2000);
@@ -67,11 +65,7 @@ export default function WalletDisplay({
     }
   };
 
-  useEffect(() => {
-    fetchUserNfts();
-  }, [hasMinted]);
-
-  async function fetchUserNfts() {
+  const fetchUserNfts = useCallback(async () => {
     setIsLoading(true);
     try {
       const data = { address: await provider.getAddress() };
@@ -81,14 +75,17 @@ export default function WalletDisplay({
         body: JSON.stringify(data),
       });
       const messageResponse = await response.json();
-      console.log(messageResponse);
       setOwnedNftsArray(messageResponse.data.ownedNfts);
     } catch (e: any) {
       setError(e.details);
       console.error("Error fetching NFTs:", e);
     }
     setIsLoading(false);
-  }
+  }, [provider, setError, setOwnedNftsArray]);
+
+  useEffect(() => {
+    fetchUserNfts();
+  }, [fetchUserNfts, hasMinted]);
 
   async function constructNftTransfer(
     event: React.MouseEvent<HTMLButtonElement>
@@ -118,23 +115,17 @@ export default function WalletDisplay({
       setUserOpHash(uoHash.hash);
       setBannerState(BANNER_STATES.USER_OP_HASH);
     } catch (e: any) {
-      console.log(e);
       setError(e.details || e.message);
       setBannerState(BANNER_STATES.ERROR);
       setIsTransferring(false);
-
-      fetch("/api/log-error-to-slack/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: e.name,
-          message: e.message,
-          stack: e.stack,
-          details: e.details,
-        }),
-      });
     }
-  }, [provider, recipientAddress]);
+  }, [
+    provider,
+    recipientAddress,
+    setBannerState,
+    setError,
+    transferNftTokenId,
+  ]);
 
   function truncateDescription(description: string, wordCount: number) {
     const words = description.split(" ");
@@ -178,12 +169,14 @@ export default function WalletDisplay({
                   className="rounded-lg shadow-xl max-w-[250px] max-h-[600px] overflow-hidden"
                 >
                   <figure>
-                    <img
+                    <Image
                       src={
                         "https://static.alchemyapi.io/assets/accountkit/accountkit.jpg"
                       }
                       alt="user nft image"
                       className="w-full max-h-[300px]"
+                      width={300}
+                      height={300}
                     />
                   </figure>
                   <div className="p-4">
