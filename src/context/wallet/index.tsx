@@ -78,7 +78,7 @@ export const WalletContextProvider = ({
 
       setScaAddress(await provider.getAddress());
     },
-    [magic, connectProviderToAccount, signer, provider, isLoading]
+    [magic, connectProviderToAccount, signer, provider]
   );
 
   const logout = useCallback(async () => {

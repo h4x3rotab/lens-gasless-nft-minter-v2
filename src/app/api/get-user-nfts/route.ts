@@ -1,6 +1,5 @@
+import { Alchemy, Network } from "alchemy-sdk";
 import { NextRequest, NextResponse } from "next/server";
-
-const { Alchemy, Network } = require("alchemy-sdk");
 
 const alchemy = new Alchemy({
   url: process.env.ALCHEMY_RPC_URL,
@@ -12,8 +11,6 @@ export async function POST(request: NextRequest) {
 
   const { address } = body;
   const nfts = await alchemy.nft.getNftsForOwner(address);
-
-  //console.log(nfts);
 
   return NextResponse.json({
     data: nfts,

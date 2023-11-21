@@ -38,7 +38,7 @@ export default function Navbar() {
       setEmail(email);
       closeModal();
     },
-    [login, email]
+    [login, email, closeModal]
   );
 
   const handleLogout = useCallback(async () => {
@@ -60,11 +60,10 @@ export default function Navbar() {
       throw new Error("Invalid Ethereum address");
     }
     if (address.length !== 42) {
-      // 2 for '0x' and 40 for the address
       throw new Error("Invalid Ethereum address length");
     }
 
-    const prefix = address.substr(0, 2 + prefixLength); // 2 for '0x'
+    const prefix = address.substr(0, 2 + prefixLength);
     const suffix = address.substr(-suffixLength);
 
     return `${prefix}...${suffix}`;
@@ -92,10 +91,13 @@ export default function Navbar() {
           </div>
           <div className="dropdown dropdown-end">
             {scaAddress ? (
-              <img
+              <Image
+                alt="avatar"
                 src={generator.generateRandomAvatar(scaAddress)}
                 tabIndex={0}
                 className="w-12 h-12 rounded-full align-middle cursor-pointer mr-2 mb-2"
+                width={48}
+                height={48}
               />
             ) : (
               ""
@@ -141,14 +143,14 @@ export default function Navbar() {
             />
             <div className="flex flex-row justify-end max-md:flex-col flex-wrap gap-[12px] mt-5">
               <button
-                type="button" // Specify the type so it doesn't trigger form submission
+                type="button"
                 onClick={closeModal}
                 className="btn bg-gradient-2transition ease-in-out duration-500 transform hover:scale-110"
               >
                 Close
               </button>
               <button
-                type="submit" // This will submit the form
+                type="submit"
                 className="btn btn-primary text-white bg-gradient-1transition ease-in-out duration-500 transform hover:scale-110"
               >
                 Login
