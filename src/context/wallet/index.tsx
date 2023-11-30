@@ -65,7 +65,7 @@ export const WalletContextProvider = ({
       const didToken = await magic.auth.loginWithEmailOTP({
         email,
       });
-      const metadata = await magic.user.getMetadata();
+      const metadata = await magic.user.getInfo();
       if (!didToken || !metadata.publicAddress || !metadata.email) {
         throw new Error("Magic login failed");
       }

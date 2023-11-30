@@ -1,4 +1,4 @@
-export const nftContractAddress = "0x9bA2672ef8F1016a0E05032B18408f8CdE774bc6";
+export const nftContractAddress = "0xD8c59f88121Fd7a4dF21E1C8598D41702525FD49";
 
 export const AccountKitNftMinterAbi = [
   {

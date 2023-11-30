@@ -34,12 +34,12 @@ export default function SuccessAlertComponent({ message, hash }: any) {
             <span>
               <p className="font-bold">{message} </p>
               <a
-                href={`https://testnet.arbiscan.io/tx/${hash}`}
+                href={`https://mumbai.polygonscan.com/tx/${hash}`}
                 className="link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Check out your transaction on Arbiscan
+                Check out your transaction on PolygonScan
               </a>
               .
             </span>

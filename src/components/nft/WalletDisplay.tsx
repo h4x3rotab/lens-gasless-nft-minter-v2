@@ -193,8 +193,8 @@ export default function WalletDisplay({
                       <dialog id="my_modal_2" className="modal">
                         <div className="modal-box">
                           <h3 className="font-bold text-sm">
-                            Enter an Arbitrum testnet address to send this NFT
-                            to:
+                            Enter a Polygon Mumbai testnet address to send this
+                            NFT to:
                           </h3>
                           <input
                             type="text"

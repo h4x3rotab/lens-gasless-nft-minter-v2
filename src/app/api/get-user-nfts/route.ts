@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const alchemy = new Alchemy({
   url: process.env.ALCHEMY_RPC_URL,
-  network: Network.ARB_GOERLI,
+  network: Network.MATIC_MUMBAI,
 });
 
 export async function POST(request: NextRequest) {

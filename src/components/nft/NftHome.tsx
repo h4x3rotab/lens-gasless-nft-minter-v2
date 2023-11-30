@@ -39,7 +39,7 @@ export default function NftHome({
         setTxHash(txHash);
         setBannerState(BANNER_STATES.TX_HASH);
 
-        const txReceipt = await provider.rpcClient.waitForTransactionReceipt({
+        await provider.rpcClient.waitForTransactionReceipt({
           hash: txHash,
         });
 
@@ -131,7 +131,7 @@ export default function NftHome({
       <div className="relative mb-[-48px] md:mb-0 flex flex-col md:flex-row gap-10 md:gap-20 mx-6 md:mx-20 mt-12">
         <div className="flex items-center justify-center">
           <Image
-            src="https://raw.githubusercontent.com/AlvaroLuken/cryptopunks/main/accountkit.jpg"
+            src="https://static.alchemyapi.io/assets/accountkit/accountkit.jpg"
             alt="sample nft"
             className="rounded-lg h-auto max-w-full lg:min-w-[540px] px-12 md:px-0 lg:max-h-[850px]"
             width={540}
