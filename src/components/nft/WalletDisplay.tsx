@@ -78,7 +78,6 @@ export default function WalletDisplay({
       setOwnedNftsArray(messageResponse.data.ownedNfts);
     } catch (e: any) {
       setError(e.details);
-      console.error("Error fetching NFTs:", e);
     }
     setIsLoading(false);
   }, [provider, setError, setOwnedNftsArray]);

@@ -2,7 +2,7 @@
 import { useWalletContext } from "@/context/wallet";
 import Image from "next/image";
 import { AvatarGenerator } from "random-avatar-generator";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import demoLogo from "../../public/assets/demo_logo.svg";
 
 export default function Navbar() {
@@ -10,14 +10,11 @@ export default function Navbar() {
   const [, setIsLoggingOut] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const generator = new AvatarGenerator();
-  const [imageUrl, setImageUrl] = useState("");
 
   const { isLoggedIn, login, logout, username, scaAddress } =
     useWalletContext();
 
-  useEffect(() => {
-    setImageUrl(generator.generateRandomAvatar(scaAddress));
-  }, [scaAddress]);
+  const imageUrl = generator.generateRandomAvatar(scaAddress);
 
   const openModal = useCallback(() => {
     setIsLoggingIn(true);
