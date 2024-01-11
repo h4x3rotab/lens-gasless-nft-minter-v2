@@ -4,11 +4,13 @@ import Image from "next/image";
 import { AvatarGenerator } from "random-avatar-generator";
 import { useCallback, useState } from "react";
 import demoLogo from "../../public/assets/demo_logo.svg";
+import {useInterval} from "@/hooks/useInterval";
 
 export default function Navbar() {
   const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
   const [, setIsLoggingOut] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
+  const [eligibility, setEligibility] = useState<string>("❓");
   const generator = new AvatarGenerator();
 
   const { isLoggedIn, login, logout, username, scaAddress } =
@@ -71,6 +73,18 @@ export default function Navbar() {
     return `${prefix}...${suffix}`;
   }
 
+  useInterval(async () => {
+    if (scaAddress) {
+      const resp = await fetch('/api/get-user-allowed/', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address: scaAddress})
+      });
+      const { data: result } = await resp.json();
+      setEligibility(result ? '✅' : '❌');
+    }
+  }, 3000);
+
   return (
     <div className="navbar font-mono mt-2 flex justify-between items-center">
       <div className="flex-1 ml-3 md:ml-6">
@@ -90,6 +104,9 @@ export default function Navbar() {
             >
               {truncateEthAddress(scaAddress as string)}
             </a>
+          </div>
+          <div className="md:mr-2.5">
+            Sponsored: {eligibility}
           </div>
           <div className="dropdown dropdown-end">
             {scaAddress ? (
