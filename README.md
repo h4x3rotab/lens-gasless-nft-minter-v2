@@ -1,6 +1,14 @@
-# Alchemy Gasless NFT Minter Dapp
+# Proof-of-Shilling Gas Sponsor AA Dapp page
 
-This is a simple Next.js single page application that leverages account abstraction via the Alchemy aa-sdk, allowing users to mint an NFT Token to an SCA without needing to have an EOA wallet or incur any gas fees.
+This is a fork of [Alchemy Gasless NFT Minter Dapp](https://github.com/alchemyplatform/aa-sdk/tree/main/examples/alchemy-daapp). It's modified to allow gas sponsorship by sharing a Lens post. More details can be found [here](https://github.com/h4x3rotab/hookathon-mirror-for-gas).
+
+You should copy `.env.example` to `.env` and fill in all the info before running the service. You will need to preapre:
+
+- An [Alchemy](https://dashboard.alchemy.com/) account for `ALCHEMY_KEY`
+- An Alchemy project for `ALCHEMY_RPC_URL`
+- An Alchemy Account Abstraction policy for `NEXT_PUBLIC_ALCHEMY_GAS_MANAGER_POLICY_ID`
+- An [4everland](https://dashboard.4everland.org) IPFS bucket for `S3_BUCKET`, `S3_ACCESS_KEY`, and `S3_SECRET_KEY`
+
 
 ## Run Locally @ [http://localhost:3000](http://localhost:3000)
 
@@ -9,17 +17,3 @@ yarn
 yarn build
 yarn dev
 ```
-
-## Contributing
-
-We welcome contributions to the examples/alchemy-daapp repo! If you would like to contribute, please follow these steps:
-
-**This repository follows an MIT license**
-
-1. Clone the repository
-2. Create a new branch for your changes
-3. Make your changes and commit them
-4. Push your changes to your forked repository
-5. Submit a pull request to the examples/aa-sdk repo
-
-Please ensure that your code follows our coding standards and that you have added appropriate tests for your changes. We appreciate your contributions and look forward to working with you.

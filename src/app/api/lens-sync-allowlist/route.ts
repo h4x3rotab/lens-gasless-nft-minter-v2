@@ -1,5 +1,6 @@
 import { Alchemy, Network } from "alchemy-sdk";
 import { NextRequest, NextResponse } from "next/server";
+import { contract } from "../../allowListContract";
 
 // const alchemy = new Alchemy({
 //   url: process.env.ALCHEMY_RPC_URL,
@@ -58,23 +59,18 @@ curl --request PUT \
   return await response.json();
 }
 
-async function readActionAllowlist() {
-  // viem:
-  // get contract
-  // query contract
-  // return full list
-}
-
 export async function GET(request: NextRequest) {
   const policy = await getPolicy();
-  const toAdd = '0xEFEc70dcf64cB12dC4D46fc7a3a7d05b1b098526';
+  const allowList = await contract.read.getAllowList();;
   // DEMO update
 
-  // @ts-ignore
   const allowlist = policy.rules.senderAllowlist || [];
-  if (!allowlist.includes(toAdd)) {
+  for (const toAdd of allowList) {
     // @ts-ignore
-    allowlist.push(toAdd);
+    if (!allowlist.includes(toAdd)) {
+      // @ts-ignore
+      allowlist.push(toAdd);
+    }
   }
   policy.rules.senderAllowlist = allowlist;
 
