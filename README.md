@@ -17,3 +17,5 @@ yarn
 yarn build
 yarn dev
 ```
+
+If you have already started the Lens Smart Post fontend ([main readme here](https://github.com/h4x3rotab/hookathon-mirror-for-gas)), now you can play with it.
